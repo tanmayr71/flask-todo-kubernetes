@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1 
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: tr2452/my_todo_app:v4
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_HOST
+          value: mongo-db-service  
+        - name: MONGO_PORT
+          value: "27017"
+        - name: FAILURE_MODE  # Add this line
+          value: "true"        # Add this line to trigger failure mode  
+        livenessProbe:
+          httpGet:
+            path: /healthz  # Replace with the path to your health check endpoint
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /ready  # Replace with the path to your readiness check endpoint
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5

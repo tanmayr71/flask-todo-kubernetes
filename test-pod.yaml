@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-crash-loop-pod
+  namespace: default
+spec:
+  containers:
+  - name: crash-loop-container
+    image: busybox
+    command: ["false"]
