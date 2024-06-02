@@ -72,6 +72,9 @@ kubectl get svc -o wide
 ## Monitoring and Alerting
 
 - Integrated with Prometheus for monitoring and Alertmanager for alerting to a designated Slack channel on application issues.
+  
+  <img width="719" alt="Screenshot 2023-11-09 at 1 25 32 PM" src="https://github.com/tanmayr71/flask-todo-kubernetes/assets/55703966/9e5ddbd4-011f-4d21-a9a6-33e6486d79ce">
+
 
 ## Contributing
 
